@@ -1,0 +1,141 @@
+pip install Flask
+my_website/
+|-- app.py
+|-- templates/
+|   |-- base.html
+|   |-- index.html
+|   |-- sports.html
+|   |-- health.html
+|   |-- finance.html
+|   |-- games.html
+|-- static/
+    |-- css/
+        |-- styles.css
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/sports')
+def sports():
+    return render_template('sports.html')
+
+@app.route('/health')
+def health():
+    return render_template('health.html')
+
+@app.route('/finance')
+def finance():
+    return render_template('finance.html')
+
+@app.route('/games')
+def games():
+    return render_template('games.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{% block title %}My Website{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/sports">Sports</a></li>
+                <li><a href="/health">Health</a></li>
+                <li><a href="/finance">Finance</a></li>
+                <li><a href="/games">Games</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 My Website</p>
+    </footer>
+</body>
+</html>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Welcome to My Content Writing Website</h1>
+<p>Explore articles on Sports, Health, Finance, and Games.</p>
+{% endblock %}
+{% extends "base.html" %}
+{% block title %}Sports{% endblock %}
+{% block content %}
+<h1>Sports Articles</h1>
+<p>Latest updates and insights on sports.</p>
+{% endblock %}
+{% extends "base.html" %}
+{% block title %}Health{% endblock %}
+{% block content %}
+<h1>Health Articles</h1>
+<p>Stay healthy with our tips and articles.</p>
+{% endblock %}
+{% extends "base.html" %}
+{% block title %}Finance{% endblock %}
+{% block content %}
+<h1>Finance Articles</h1>
+<p>Manage your finances with our expert advice.</p>
+{% endblock %}
+{% extends "base.html" %}
+{% block title %}Games{% endblock %}
+{% block content %}
+<h1>Games Articles</h1>
+<p>Discover the latest in the gaming world.</p>
+{% endblock %}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+python app.py
+
